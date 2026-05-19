@@ -141,14 +141,20 @@ a {
 
 .hero-inner {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 48px;
   align-items: center;
 }
 
 .hero-visual {
   position: relative;
+  width: 100%;
+  min-width: 0;
   min-height: 560px;
+}
+
+.hero-copy {
+  min-width: 0;
 }
 
 .hero-photo {
@@ -395,7 +401,7 @@ h1 {
 }
 
 .page-grid {
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
 }
 
 .project-grid {
@@ -425,6 +431,13 @@ h1 {
 .page-card {
   min-height: 190px;
   padding: 22px;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.page-card:hover {
+  transform: translateY(-4px);
+  background: #ffffff;
+  box-shadow: 0 22px 48px rgba(0, 74, 146, 0.14);
 }
 
 .page-card h3,
@@ -952,15 +965,24 @@ h1 {
   }
 
   .hero-visual {
-    min-height: 510px;
+    min-height: auto;
   }
 
   .hero-photo {
+    position: relative;
+    display: block;
     width: min(100%, 390px);
     height: 470px;
   }
 
-  .page-grid,
+  .metric-strip {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: min(100%, 390px);
+    margin-top: 12px;
+  }
+
   .project-grid,
   .tech-matrix,
   .process-steps,
@@ -992,18 +1014,17 @@ h1 {
 }
 
 @media (max-width: 560px) {
-  .hero-visual {
-    min-height: 540px;
-  }
-
   .hero-photo {
     height: 420px;
   }
 
-  .metric-strip {
-    left: 12px;
+  .page-grid {
     grid-template-columns: 1fr;
-    width: calc(100% - 24px);
+  }
+
+  .metric-strip {
+    grid-template-columns: 1fr;
+    width: 100%;
   }
 
   .metric {
